@@ -19,6 +19,14 @@ test('амжилттай нэвтрэх', async ({ page }) => {
   // Нэвтэрсний дараа зөв URL руу орсон эсэхийг шалгах
   await expect(page).toHaveURL(/inventory.html/);
 
+  // Logout хийх
+  await page.getByRole('button', { name: 'Open Menu' }).click();
+  await page.getByRole('link', { name: 'Logout' }).click();
+
+  // Login хуудас руу буцсан эсэхийг шалгах
+  await expect(page).toHaveURL(/saucedemo\.com\/?$/);
+  await expect(page.getByPlaceholder('Username')).toBeVisible();
+
 });
 
 test('амжилтгүй нэвтрэх', async ({ page }) => {
@@ -60,4 +68,12 @@ test('бараа сагсанд нэмэх', async ({ page }) => {
 
   // Сагсны тоо 1 болсон эсэхийг шалгах
   await expect(page.locator('.shopping_cart_badge')).toHaveText('1');
+
+  // Logout хийх
+  await page.getByRole('button', { name: 'Open Menu' }).click();
+  await page.getByRole('link', { name: 'Logout' }).click();
+
+  // Login хуудас руу буцсан эсэхийг шалгах
+  await expect(page).toHaveURL(/saucedemo\.com\/?$/);
+  await expect(page.getByPlaceholder('Username')).toBeVisible();
 });
