@@ -40,3 +40,24 @@ test('амжилтгүй нэвтрэх', async ({ page }) => {
     )
   ).toBeVisible();
 });
+
+test('бараа сагсанд нэмэх', async ({ page }) => {
+  // SauceDemo веб сайтыг нээх
+  await page.goto('https://www.saucedemo.com');
+
+  // Нэвтрэн орох
+  await page.getByPlaceholder('Username').fill('standard_user');
+  await page.getByPlaceholder('Password').fill('secret_sauce');
+  await page.getByRole('button', { name: 'Login' }).click();
+
+  // Products хуудас нээгдсэн эсэхийг шалгах
+  await expect(
+    page.getByText('Products', { exact: true })
+  ).toBeVisible();
+
+  // Эхний барааг сагсанд нэмэх
+  await page.getByRole('button', { name: 'Add to cart' }).first().click();
+
+  // Сагсны тоо 1 болсон эсэхийг шалгах
+  await expect(page.locator('.shopping_cart_badge')).toHaveText('1');
+});
