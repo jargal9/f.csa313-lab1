@@ -17,7 +17,7 @@ test('амжилттай нэвтрэх', async ({ page }) => {
   ).toBeVisible();
 
   // Нэвтэрсний дараа зөв URL руу орсон эсэхийг шалгах
-  await expect(page).toHaveURL(/inventory.html/);
+  await expect(page).toHaveURL(/fail.html/);
 
   // Logout хийх
   await page.getByRole('button', { name: 'Open Menu' }).click();
